@@ -250,7 +250,8 @@ Tell me about Health11m
 Provide details about the Health11m insurance product, including its features, coverage, and target customers.
 ---
 
-## 1. Reranking
+
+## 2. Reranking
 
 After retrieval, documents are reranked according to relevance.
 
