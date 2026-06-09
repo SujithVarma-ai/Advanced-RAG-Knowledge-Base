@@ -23,54 +23,46 @@ The knowledge base contains information about:
 
 ---
 
-## 📂 Project Structure
+---
+
+# 🧠 System Workflow 
+
+---
+
+# 📥 Ingestion Pipeline (`ingest.py`)
+
+The ingestion module prepares the knowledge base for retrieval.
+
+### Workflow
 
 ```text
-Advanced-RAG-Knowledge-Base/
-│
-├── knowledge-base/
-│   ├── company/
-│   ├── contracts/
-│   ├── employees/
-│   └── products/
-│
-├── app.py
-├── ingest.py
-├── answer.py
-├── eval.py
-├── evaluator.py
-├── ragadvanced.py
-├── tests.jsonl
-├── README.md
+Knowledge Base Documents
+        │
+        ▼
+Load Markdown Files
+        │
+        ▼
+Chunk Documents
+        │
+        ▼
+Generate Embeddings
+        │
+        ▼
+Store in Vector Database
+        │
+        ▼
+Ready for Retrieval
 ```
 
----
+### Responsibilities
 
-## 🧠 How the System Works
+* Reads all knowledge-base documents
+* Splits documents into chunks
+* Creates vector embeddings
+* Builds the retrieval index
+* Stores vectors for semantic search
 
-### Step 1: Knowledge Base Creation
-
-Documents are organized into categories:
-
-- Company Information
-- Employee Profiles
-- Business Contracts
-- Product Details
-
-Each document is stored as a Markdown file.
-
----
-
-### Step 2: Ingestion
-
-The ingestion pipeline:
-
-- Reads documents
-- Splits content into chunks
-- Generates embeddings
-- Stores vectors for retrieval
-
-Run:
+### Run
 
 ```bash
 python ingest.py
@@ -78,21 +70,43 @@ python ingest.py
 
 ---
 
-### Step 3: Retrieval
+# 🔎 Question Answering (`answer.py`)
 
-When a user asks a question:
+This module performs retrieval and answer generation.
 
-1. Query embedding is generated
-2. Relevant documents are retrieved
-3. Retrieved context is sent to the LLM
+### Workflow
 
----
+```text
+User Question
+      │
+      ▼
+Generate Query Embedding
+      │
+      ▼
+Search Vector Database
+      │
+      ▼
+Retrieve Relevant Chunks
+      │
+      ▼
+Build Context
+      │
+      ▼
+Send Context + Query to LLM
+      │
+      ▼
+Generate Answer
+```
 
-### Step 4: Answer Generation
+### Responsibilities
 
-The language model generates a response grounded in the retrieved knowledge.
+* Accepts user questions
+* Performs semantic retrieval
+* Collects relevant context
+* Sends context to the LLM
+* Produces grounded responses
 
-Run:
+### Run
 
 ```bash
 python answer.py
@@ -100,28 +114,190 @@ python answer.py
 
 ---
 
-### Step 5: Evaluation
+# 💬 Chat Interface (`app.py`)
 
-Generated responses are automatically evaluated for:
+Creates a gradio app showing the chat interface 
 
-- Accuracy
-- Relevance
-- Completeness
-- Groundedness
+### Run
 
-Run:
+```bash
+python app.py
+```
+
+## Evaluation Workflow
+
+```text 
+ ingest.py
+     │
+     ▼
+ answer.py
+     │
+     ▼
+  app.py
+```
+
+---
+
+# 📊 Evaluation Pipeline
+
+The project includes an automated evaluation framework for measuring RAG quality.
+
+---
+
+## Test Dataset (`tests.jsonl`)
+
+Contains:
+
+* Test Questions
+* Ground Truth Answers
+* Evaluation Samples
+
+Used to benchmark the RAG system.
+
+---
+
+## Testing Module (`test.py`)
+
+### Responsibilities
+
+* Loads evaluation questions
+* Sends queries to the RAG pipeline
+* Collects generated answers
+* Creates evaluation outputs
+
+### Run
+
+```bash
+python test.py
+```
+
+---
+
+## Evaluation Module (`eval.py`)
+
+### Responsibilities
+
+* Compares generated answers
+* Measures relevance
+* Measures accuracy
+* Measures completeness
+
+### Run
 
 ```bash
 python eval.py
 ```
 
-or
+---
+
+## Judge Evaluator (`evaluator.py`)
+
+### Responsibilities
+
+* Uses an LLM-as-a-Judge approach
+* Evaluates answer quality
+* Produces evaluation scores
+* Generates performance reports
+
+### Run
 
 ```bash
 python evaluator.py
 ```
 
 ---
+
+## Evaluation Workflow
+
+```text
+tests.jsonl
+     │
+     ▼
+  test.py
+     │
+     ▼
+Generated Answers
+     │
+     ▼
+   eval.py
+     │
+     ▼
+evaluator.py
+     │
+     ▼
+Evaluation Scores
+```
+
+# 🚀 Advanced RAG Features
+
+This project extends traditional RAG by incorporating:
+
+## 1. Query Rewriting
+
+The original user query is rewritten into a more retrieval-friendly form.
+
+### Example
+
+**User Query**
+
+```text
+Tell me about Health11m
+```
+
+**Rewritten Query**
+
+```text
+Provide details about the Health11m insurance product, including its features, coverage, and target customers.
+---
+
+## 1. Reranking
+
+After retrieval, documents are reranked according to relevance.
+
+### Example
+
+**Retrieved Documents**
+
+```text
+1. Product Overview
+2. Employee Profile
+3. Contract Information
+4. Health11m Product Details
+```
+
+**After Reranking**
+
+```text
+1. Health11m Product Details
+2. Product Overview
+3. Contract Information
+4. Employee Profile
+---
+
+# 🏗️ Final Advanced RAG Workflow
+
+```text
+User
+ │
+ ▼
+Question
+ │
+ ▼
+Query Rewriting
+ │
+ ▼
+Retriever
+ │
+ ▼
+Reranking
+ │
+ ▼
+LLM
+ │
+ ▼
+Answer
+```
+
 
 ## 📊 Knowledge Base Categories
 
@@ -165,7 +341,7 @@ Contains:
 Clone the repository:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Advanced-RAG-Knowledge-Base.git
+git clone https://github.com/SujithVarma-ai/Advanced-RAG-Knowledge-Base.git
 ```
 
 Move into the project:
@@ -178,28 +354,6 @@ Install dependencies:
 
 ```bash
 pip install -r requirements.txt
-```
-
----
-
-## ▶️ Running the Project
-
-### Build the Vector Database
-
-```bash
-python ingest.py
-```
-
-### Ask Questions
-
-```bash
-python answer.py
-```
-
-### Run Evaluation
-
-```bash
-python eval.py
 ```
 
 ---
