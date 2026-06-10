@@ -124,6 +124,10 @@ Creates a gradio app showing the chat interface
 python app.py
 ```
 
+# 📸 Application Screenshot
+
+![App Screenshot](https://github.com/SujithVarma-ai/Advanced-RAG-Knowledge-Base/blob/main/Screenshot%202026-06-08%20160135.png)
+
 ## Evaluation Workflow
 
 ```text 
@@ -204,6 +208,11 @@ python eval.py
 ```bash
 python evaluator.py
 ```
+
+# 📸 Application Screenshot
+
+![App Screenshot](https://github.com/SujithVarma-ai/Advanced-RAG-Knowledge-Base/blob/main/Screenshot%202026-06-08%20155908.png)
+![App Screenshot](https://github.com/SujithVarma-ai/Advanced-RAG-Knowledge-Base/blob/main/Screenshot%202026-06-08%20155926.png)
 
 ---
 
