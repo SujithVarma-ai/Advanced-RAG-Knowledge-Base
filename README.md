@@ -1,6 +1,13 @@
 # 🚀 Advanced RAG Knowledge Base
 
-A Retrieval-Augmented Generation (RAG) system that combines structured knowledge retrieval with Large Language Models to answer questions accurately using company, employee, contract, and product information.
+A Retrieval-Augmented Generation (RAG) system that combines structured knowledge retrieval with Large Language Models to answer questions accurately using company, employee, contract, and product information. 
+
+---
+
+# RAG Features
+
+Query Rewriting – Transforms user questions into retrieval-optimized queries for improved search performance.
+Reranking – Reorders retrieved documents based on relevance before passing context to the LLM.
 
 ---
 
