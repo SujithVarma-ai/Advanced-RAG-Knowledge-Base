@@ -264,7 +264,7 @@ Tell me about Health11m
 
 ```text
 Provide details about the Health11m insurance product, including its features, coverage, and target customers.
----
+```
 
 
 ## 2. Reranking
@@ -289,7 +289,7 @@ After retrieval, documents are reranked according to relevance.
 2. Product Overview
 3. Contract Information
 4. Employee Profile
----
+```
 
 # 🏗️ Final Advanced RAG Workflow
 
