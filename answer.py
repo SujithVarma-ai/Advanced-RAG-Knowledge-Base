@@ -38,7 +38,9 @@ Context:
 vectorstore = Chroma(persist_directory=DB_NAME, embedding_function=embeddings)
 print("DB_NAME =", DB_NAME)
 print("Collection count =", vectorstore._collection.count())
-retriever = vectorstore.as_retriever()
+retriever = vectorstore.as_retriever(
+    search_kwargs={"k": RETRIEVAL_K}
+)
 llm = ChatGoogleGenerativeAI(temperature=0, model=MODEL)
 
 
@@ -46,7 +48,7 @@ def fetch_context(question: str) -> list[Document]:
     """
     Retrieve relevant context documents for a question.
     """
-    return retriever.invoke(question, k=RETRIEVAL_K)
+    return retriever.invoke(question)
 
 
 def combined_question(question, history=[]):
