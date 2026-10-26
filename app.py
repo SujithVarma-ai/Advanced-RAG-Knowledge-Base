@@ -1,4 +1,5 @@
 import gradio as gr
+import os
 from dotenv import load_dotenv
 
 from answer import answer_question
@@ -59,7 +60,11 @@ def main():
             put_message_in_chatbot, inputs=[message, chatbot], outputs=[message, chatbot]
         ).then(chat, inputs=chatbot, outputs=[chatbot, context_markdown])
 
-    ui.launch(inbrowser=True, theme=theme)
+    ui.launch(
+        server_name="0.0.0.0",
+        server_port=int(os.environ.get("PORT", "10000")),
+        theme=theme,
+    )
 
 
 if __name__ == "__main__":
